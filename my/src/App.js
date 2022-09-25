@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavigationContainer, StackActions,  } from '@react-navigation/native';
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
-import TaxBro_pink from './assets/TaxBro_pink.png';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -59,7 +58,7 @@ function LoginScreen({ navigation }) {
 function SignUpScreen({ navigation }) {
   return(
     <View style={styles.container}>
-    <Image source={TaxBro_pink} style={{ width: 200, height: 300}} />
+    <Image source={" "} style={{ width: 200, height: 300}} />
     <Text style={{ color: "#fff", fontSize: 15, Maxheight: 40 }}>First Name</Text>
     <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40 }}
       editable
@@ -107,7 +106,7 @@ function PasswordResetScreen({ navigation }) {
       <Text style={{ height: 50 }}></Text>
       <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}>Reset Password</Text>
       <Text style={{ Maxheight:90, height:70 }}></Text>
-      <Image source={TaxBro_pink} style={{ width: 300, height: 250 }} />
+      <Image source={" "} style={{ width: 300, height: 250 }} />
       <Text style={{ color: "#fff", fontSize: 15, textAlign: "center", fontWeight: "bold"}} >Please enter your email address to reset your Password.</Text>
       <Text style={{ height:40 }}></Text>
       <Text style={{ color: "#fff", fontSize: 15, Maxheight: 40 }}>Email Address</Text>
@@ -128,7 +127,7 @@ function PasswordResetScreen({ navigation }) {
 function DashboardScreen({ navigation }) {
   return (
     <View>
-      <Text style={{ color: Colors.black, fontSize: 30, fontWeight: 'bold', textAlign: "center", }}>Welcome to Tax.<bro/>!</Text>
+      <Text style={{ color: Colors.black, fontSize: 30, fontWeight: 'bold', textAlign: "center", }}>Welcome to Asserlee!</Text>
       <Text style={{ color: Colors.black, fontSize: 30, textAlign: "center", margin: '20' }}>Welcome to your dashboard!</Text>
 
     </View>
