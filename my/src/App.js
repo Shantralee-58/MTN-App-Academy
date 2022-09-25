@@ -1,363 +1,161 @@
-import React, { Component } from 'react';
-import { View, Pressable, Dimensions, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Button } from 'react-native';
+import React, { useState } from 'react';
+import { NavigationContainer, StackActions,  } from '@react-navigation/native';
+import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import TaxBro_pink from './assets/TaxBro_pink.png';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const Login = ({ navigation }) => {
-    return ( <
-        SafeAreaView style = { styles.screenContainer } >
-        <
-        Text style = { styles.baseText } >
-        Login <
-        /Text> <
-        TextInput style = { styles.input }
-        placeholder = "Username" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "Password" /
-        >
-        <
-        Pressable style = { styles.buttonStyle }
-        onPress = {
-            () => navigation.navigate('Dashboard')
-        } >
-        <
-        Text style = { styles.buttonTextStyle } > Login < /Text> < /
-        Pressable >
+const Stack = createNativeStackNavigator();
 
-        <
-        Pressable style = { styles.outlinebuttonStyle }
-        onPress = {
-            () => navigation.navigate('SignUp')
-        } >
-        <
-        Text style = { styles.outlinebuttonTextStyle } > Sign Up < /Text> < /
-        Pressable > <
-        /SafeAreaView>
+function App() {
+  return (
+    <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login" >
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false, options }} />
+        <Stack.Screen name="Sign Up" component={SignUpScreen} options={options.container} />
+        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={{ headerShown: false, options }} /> 
+        <Stack.Screen name="Dashboard" component={DashboardScreen} options={options.container} />
+        
+        </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+  
 
-    );
-};
+function LoginScreen({ navigation }) {
+  return (<View style={styles.container}>
+    <Text style={{ color: "#fff", fontSize: 30, fontWeight: 'bold', }}>Login</Text>
+    <Text style={{ Maxheight:90, height:70 }}></Text>
+    <Image source={TaxBro_pink} style={{ width: 300, height: 300 }} />
+    <Text style={{ color: "#fff", fontSize: 15,  }}>Email Address</Text>
+    <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40 }}
+      editable
+      maxLength={ 50 }
+      minLength={ 10 } 
+      />
+    <Text></Text>
+    <Text style={{ color: "#fff", fontSize: 15 }}>Password</Text>
+    <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40 }}
+      editable
+      maxLength={ 50 } 
+      secureTextEntry={true}
+      onChangeText=""
+      />
+    <Text></Text>
+    <Button title='Sign In' onPress={ () => { navigation.navigate("Dashboard"); }}></Button>
+    <Text></Text>
+    <Text style={{ color: "#FFF", fontSize: 15, }}>Forgot your Password?</Text>
+    <Text onPress={() => (navigation.navigate("Password Reset"))} 
+    style={{ color: "#fff", fontSize: 15, color: '#00F' }}>Reset it here.</Text>
+    <Text style={{ height: 50 }}></Text>
+    <StatusBar style="auto" />
+    <Text style={{ color: "#fff", fontSize: 15, position:"absolute", bottom:40 }}>Don't have an account? </Text>
+    <Text onPress={() => navigation.navigate("Sign Up")}
+           style={{ fontSize: 15, color: '#00F', position:"absolute", bottom:20 }} >Click here to Sign Up.</Text>
+  </View>
+  );
+}
 
-const styles = StyleSheet.create({
-    input: {
-        height: 45,
-        width: '70%',
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-    },
-    baseText: {
-        fontSize: 40,
-        fontWeight: "bold",
-        paddingBottom: 20,
-    },
-    screenContainer: {
-        paddingTop: 5,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff8dc',
-    },
-    outlinebuttonStyle: {
-        height: 54,
-        width: '70%',
-        marginTop: 32,
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff8dc',
-        borderColor: '#f4a460',
-        borderWidth: 2,
-        shadowRadius: 5,
-        shadowOpacity: 0.7,
-        shadowColor: 'rgba(46, 229, 157, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-    },
-    outlinebuttonTextStyle: {
-        color: '#f4a460',
-        fontWeight: '700',
-    },
-    buttonStyle: {
-        height: 54,
-        width: '70%',
-        marginTop: 32,
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f4a460',
-        shadowRadius: 5,
-        shadowOpacity: 0.7,
-        shadowColor: 'rgba(46, 229, 157, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-    },
-    buttonTextStyle: {
-        color: '#fffafa',
-        fontWeight: '700',
-    },
-});
+function SignUpScreen({ navigation }) {
+  return(
+    <View style={styles.container}>
+    <Image source={TaxBro_pink} style={{ width: 200, height: 300}} />
+    <Text style={{ color: "#fff", fontSize: 15, Maxheight: 40 }}>First Name</Text>
+    <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40 }}
+      editable
+      maxLength={ 50 }
+      minLength={ 10 } 
+      onChangeText=""
+      />
+      <Text></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Last Name</Text>
+      <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30 }}
+      editable
+      maxLength={ 40 }
+      minLength={ 5 } 
+      onChangeText=""
+      />
+      <Text></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 40 }}>Email Address</Text>
+      <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40 }}
+      editable
+      maxLength={ 50 }
+      minLength={ 10 } 
+      onChangeText=""
+      />
+      <Text></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 40 }}>Password</Text>
+      <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40,  }}
+      editable
+      maxLength={ 50 }
+      minLength={ 10 } 
+      onChangeText=""
+      />
+    <Text></Text>
+    <Button title='Sign Up' onPress={() => { navigation.navigate("Login"); }} style={{ top: 0  }}></Button>  
+    <Text style={{ height:90, Maxheight:100 }}></Text>
+    <Text style={{ color: "#fff", fontSize: 15, position:"absolute", bottom:40 }}>Already have an account? </Text>
+    <Text onPress={() => navigation.navigate("Login")}
+           style={{ fontSize: 15, color: '#00F', position:"absolute", bottom:20 }} >Click here to Sign In.</Text>
+    </View>
+  );
+}
 
-export default Login;
-import React, { Component } from 'react';
-import { Pressable, Dimensions, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Button } from 'react-native';
+function PasswordResetScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={{ height: 50 }}></Text>
+      <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}>Reset Password</Text>
+      <Text style={{ Maxheight:90, height:70 }}></Text>
+      <Image source={TaxBro_pink} style={{ width: 300, height: 250 }} />
+      <Text style={{ color: "#fff", fontSize: 15, textAlign: "center", fontWeight: "bold"}} >Please enter your email address to reset your Password.</Text>
+      <Text style={{ height:40 }}></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 40 }}>Email Address</Text>
+      <Text></Text>
+      <TextInput style={{ width: 300, backgroundColor: "#fff", color: 'black', height: 40, }}
+      editable
+      maxLength={ 50 }
+      minLength={ 10 } 
+      onChangeText=""
+      />
+      <Text></Text>
+      <Button title='Submit' onPress={() => {navigation.navigate("Login")}}></Button>
+      <Text style={{ height: 200 }}></Text>
+    </View>
+  );
+}
 
-const Picture = ({ navigation }) => {
-    return ( <
-        SafeAreaView style = { styles.screenContainer } >
-        <
-        Text style = { styles.baseText } >
-        Picture View <
-        /Text>
+function DashboardScreen({ navigation }) {
+  return (
+    <View>
+      <Text style={{ color: Colors.black, fontSize: 30, fontWeight: 'bold', textAlign: "center", }}>Welcome to Tax.<bro/>!</Text>
+      <Text style={{ color: Colors.black, fontSize: 30, textAlign: "center", margin: '20' }}>Welcome to your dashboard!</Text>
 
-        <
-        Pressable style = { styles.buttonStyle }
-        onPress = {
-            () => navigation.navigate('#')
-        } >
-        <
-        Text style = { styles.buttonTextStyle } > Take Picture < /Text> < /
-        Pressable > <
-        /SafeAreaView>
-    );
-};
-
-const styles = StyleSheet.create({
-    baseText: {
-        fontSize: 40,
-        fontWeight: "bold",
-        paddingBottom: 20,
-    },
-    screenContainer: {
-        paddingTop: 1,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#3cb371',
-    },
-    buttonStyle: {
-        height: 54,
-        width: '70%',
-        marginTop: 32,
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffff00',
-        shadowRadius: 5,
-        shadowOpacity: 0.7,
-        shadowColor: 'rgba(46, 229, 157, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-    },
-    buttonTextStyle: {
-        color: '#3cb371',
-        fontWeight: '700',
-    },
-});
-
-export default Picture;
-import React, { Component } from 'react';
-import { Pressable, Dimensions, Text, StyleSheet, SafeAreaView, TextInput, View, Image } from 'react-native';
-
-const Profile = ({ navigation }) => {
-    return ( <
-        SafeAreaView style = { styles.screenContainer } >
-        <
-        Text style = { styles.baseText } >
-        Profile <
-        /Text> <
-        View >
-        <
-        Image source = { require("../assets/user.png") }
-        style = {
-            { width: 100, height: 100 }
-        }
-        /> < /
-        View > <
-        TextInput style = { styles.input }
-        placeholder = "Lindiwe" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "lindiwekhumalo833@gmail.com" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "********" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "********" /
-        >
-        <
-        Pressable style = { styles.buttonStyle }
-        onPress = {
-            () => navigation.navigate('#')
-        } >
-        <
-        Text style = { styles.buttonTextStyle } > Save < /Text> < /
-        Pressable > <
-        /SafeAreaView>
-    );
-};
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-    input: {
-        height: 50,
-        width: '80%',
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-    },
-    baseText: {
-        fontSize: 40,
-        fontWeight: "bold",
-        paddingBottom: 20,
-    },
-    screenContainer: {
-        paddingTop: 1,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#3cb371',
-    },
-    buttonStyle: {
-        height: 54,
-        width: '70%',
-        marginTop: 32,
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffff00',
-        shadowRadius: 5,
-        shadowOpacity: 0.7,
-        shadowColor: 'rgba(46, 229, 157, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-    },
-    buttonTextStyle: {
-        color: '#3cb371',
-        fontWeight: '700',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#FF14A8',
+    alignItems: 'center',
+    justifyContent: 'center',
+  
+  },
 });
 
-export default Profile;
-import React, { Component } from 'react';
-import { View, Pressable, Dimensions, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Button } from 'react-native';
-
-const SignUp = ({ navigation }) => {
-    return ( <
-        SafeAreaView style = { styles.screenContainer } >
-        <
-        Text style = { styles.baseText } >
-        SignUp <
-        /Text> <
-        TextInput style = { styles.input }
-        placeholder = "Username" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "Email" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "Password" /
-        >
-        <
-        TextInput style = { styles.input }
-        placeholder = "Confirm Password" /
-        >
-        <
-        Pressable style = { styles.buttonStyle }
-        onPress = {
-            () => navigation.navigate('Dashboard')
-        } >
-        <
-        Text style = { styles.buttonTextStyle } > Sign Up < /Text> < /
-        Pressable >
-
-        <
-        Pressable style = { styles.outlinebuttonStyle }
-        onPress = {
-            () => navigation.navigate('Login')
-        } >
-        <
-        Text style = { styles.outlinebuttonTextStyle } > Login < /Text> < /
-        Pressable > <
-        /SafeAreaView>
-
-    );
-};
-
-const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        width: '80%',
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
+const options = StyleSheet.create({
+  container: {
+    headerStyle: {
+      backgroundColor: '#FF14A8',
     },
-    baseText: {
-        fontSize: 50,
-        fontWeight: "bold",
-        paddingBottom: 20,
+    headerTitleAlign: 'center',
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      justifyContent: 'center'
     },
-    screenContainer: {
-        paddingTop: 5,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-    },
-    outlinebuttonStyle: {
-        height: 54,
-        width: '75%',
-        marginTop: 32,
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        borderColor: '#ff8c1a',
-        borderWidth: 2,
-        shadowRadius: 5,
-        shadowOpacity: 0.7,
-        shadowColor: 'rgba(46, 229, 157, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-    },
-    outlinebuttonTextStyle: {
-        color: '#ff8c1a',
-        fontWeight: '700',
-    },
-    buttonStyle: {
-        height: 54,
-        width: '75%',
-        marginTop: 32,
-        borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ff8c1a',
-        shadowRadius: 5,
-        shadowOpacity: 0.7,
-        shadowColor: 'rgba(46, 229, 157, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-    },
-    buttonTextStyle: {
-        color: '#fdfdfd',
-        fontWeight: '700',
-    },
+  }
 });
 
-export default SignUp;
+export default App;
